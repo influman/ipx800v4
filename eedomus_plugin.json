@@ -1,0 +1,217 @@
+{
+	"plugin_id": "ipx800v4",
+    "name_fr": "IPX800v4",
+	"icon": "ipx800.png",
+	"version": "1.1",
+	"creation_date": "2017-12-01",
+	"modification_date": "2017-12-02",
+	"author": "Influman",
+	"description_fr": "Contrôle IPX800v4",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "http://forum.eedomus.com/viewtopic.php?f=50&t=6226",
+	"parameters":
+  [
+		{
+			"parameter": "IP", 
+			"description": "Adresse IP de votre IPX800v4",
+			"xtype": "textfield",
+			"default_value": "192.168.0.",
+			"field": "width:130, allowBlank:false, maskRe:/[0-9.]/, regex:/^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$/,  regexText:'Adresse IP invalide [0-255].[0-255].[0-255].[0-255]'"
+        },
+		{
+			"parameter": "PORT", 
+			"description": "Port",
+			"xtype": "textfield",
+			"default_value": "80",
+			"field": "width:50, allowBlank:false"
+		},
+		{
+			"parameter": "USER", 
+			"description": "User",
+			"xtype": "textfield",
+			"default_value": "user",
+			"field": "width:200, allowBlank:false"
+		},
+		{
+			"parameter": "PASS", 
+			"description": "Password",
+			"xtype": "textfield",
+			"default_value": "password",
+			"field": "width:200, allowBlank:false"
+		},
+		{
+			"parameter": "APIKEY", 
+			"description": "Apikey",
+			"xtype": "textfield",
+			"default_value": "apikey",
+			"field": "width:200, allowBlank:false"
+		}		
+  ],
+	"scripts":"",
+	"devices":
+  [
+		{
+			"device_id": "relais1",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "IPX800 Relais 1",
+			"icon": "ipx800.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "/response/led0",
+				"POLLING": "1"
+			},
+			"values":
+			[
+				{ "value": "0", "description": "Off", "icon": "off.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&ClearR=01" },
+				{ "value": "1", "description": "On", "icon": "on.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&SetR=01" }
+			]
+    },
+	{
+			"device_id": "relais2",
+			"parent_id": "relais1",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "IPX800 Relais 2",
+			"icon": "ipx800.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "/response/led1",
+				"POLLING": "1"
+			},
+			"values":
+			[
+				{ "value": "0", "description": "Off", "icon": "off.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&ClearR=02" },
+				{ "value": "1", "description": "On", "icon": "on.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&SetR=02" }
+			]
+    },
+	{
+			"device_id": "relais3",
+			"parent_id": "relais1",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "IPX800 Relais 3",
+			"icon": "ipx800.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "/response/led2",
+				"POLLING": "1"
+			},
+			"values":
+			[
+				{ "value": "0", "description": "Off", "icon": "off.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&ClearR=03" },
+				{ "value": "1", "description": "On", "icon": "on.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&SetR=03" }
+			]
+    },
+{
+			"device_id": "relais4",
+			"parent_id": "relais1",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "IPX800 Relais 4",
+			"icon": "ipx800.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "/response/led3",
+				"POLLING": "1"
+			},
+			"values":
+			[
+				{ "value": "0", "description": "Off", "icon": "off.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&ClearR=04" },
+				{ "value": "1", "description": "On", "icon": "on.png", "http_url": "http://[VAR2]@[VAR1]/api/xdevices.json", "http_type": "GET",  "http_params": "?key=[VAR3]&SetR=04" }
+			]
+    },
+	{
+			"device_id": "compteur1",
+			"parent_id": "relais1",
+			"module_id": "51",
+			"type": "http",
+			"name_fr": "IPX800 Compteur 1",
+			"icon": "ipx800.png",
+			"utilisation_id": "35",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "string",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "/response/cpt0",
+				"POLLING": "1"
+			}
+	    },
+		{
+			"device_id": "compteur2",
+			"parent_id": "relais1",
+			"module_id": "51",
+			"type": "http",
+			"name_fr": "IPX800 Compteur 2",
+			"icon": "ipx800.png",
+			"utilisation_id": "35",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "string",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "/response/cpt1",
+				"POLLING": "1"
+			}
+	    },
+{
+			"device_id": "date",
+			"parent_id": "relais1",
+			"module_id": "51",
+			"type": "http",
+			"name_fr": "IPX800 Date Heure MAC",
+			"icon": "ipx800.png",
+			"utilisation_id": "35",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IP:plugin.parameters.PORT",
+				"VAR2": "plugin.parameters.USER:plugin.parameters.PASS",
+				"VAR3": "plugin.parameters.APIKEY",
+				"value_type": "string",
+				"ignore_errors": 3,
+				"RAW_URL": "http://[VAR2]@[VAR1]/user/status.xml",
+				"RAW_XPATH": "concat(/response/date, ' - ', /response/heure, ' - MAC ', /response/mac)",
+				"POLLING": "1"
+			}
+    }
+  ]
+}
+
